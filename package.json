@@ -1,0 +1,26 @@
+{
+  "name": "mylife-appmon",
+  "version": "1.0.0",
+  "description": "MyLife Application Monitoring",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincent-tr/mylife-appmon.git"
+  },
+  "author": "Vincent Trumpff",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/vincent-tr/mylife-appmon/issues"
+  },
+  "homepage": "https://github.com/vincent-tr/mylife-appmon#readme",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "socket.io": "^2.1.1"
+  }
+}
