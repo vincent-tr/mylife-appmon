@@ -1,14 +1,43 @@
 'use strict';
 
-const Server = require('socket.io');
-
+const Repository = require('../lib/repository');
 const Agent = require('../lib/agent');
 
-const io = new Server(12345);
-const agent = new Agent('http://localhost:12345', 'agent-0');
-agent.addBuiltin('base:heap');
+const io = require('socket.io-client');
 
-io.on('connection', conn => {
-  console.log('connection');
-  conn.on('message', data => console.log('message', JSON.stringify(data)));
-});
+class TestObject {
+  constructor() {
+    this.value = 0;
+  }
+
+  increment() {
+    ++this.value;
+  }
+}
+
+
+class Viewer {
+  constructor(url) {
+    this.socket = io(url);
+    this.socket.on('connect', () => this.socket.send({ msgtype : 'viewer-handshake' }));
+
+    this.socket.on('message', data => console.log(JSON.stringify(data)));
+
+    setInterval(() => {
+      this.socket.send({
+        msgtype : 'call',
+        agent : 'agent-0',
+        name : 'test',
+        member : 'increment',
+        args : []
+      });
+    }, 5000);
+  }
+}
+
+const repository = new Repository(12345);
+
+const agent = new Agent('http://localhost:12345', 'agent-0');
+agent.add('test', new TestObject());
+
+const viewer = new Viewer('http://localhost:12345');

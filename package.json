@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "lint": "eslint lib/* test/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,8 @@
   "dependencies": {
     "debug": "^3.1.0",
     "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.1"
   }
 }
