@@ -22,7 +22,7 @@ class Viewer {
     this.socket.on('connect', () => this.socket.send({ msgtype : 'viewer-handshake' }));
 
     this.socket.on('message', data => console.log(JSON.stringify(data)));
-
+/*
     setInterval(() => {
       this.socket.send({
         msgtype : 'call',
@@ -32,12 +32,16 @@ class Viewer {
         args : []
       });
     }, 5000);
+*/
   }
 }
 
 const repository = new Repository(12345);
 
 const agent = new Agent('http://localhost:12345', 'agent-0');
-agent.add('test', new TestObject());
+//agent.add('test', new TestObject());
+agent.addBuiltin('base:heap');
+agent.addBuiltin('base:process');
+agent.addBuiltin('base:os');
 
 const viewer = new Viewer('http://localhost:12345');
