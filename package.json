@@ -2,7 +2,7 @@
   "name": "mylife-appmon",
   "version": "1.0.0",
   "description": "MyLife Application Monitoring",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
