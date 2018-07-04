@@ -1,8 +1,6 @@
 'use strict';
 
-const Repository = require('../lib/repository');
-const Agent = require('../lib/agent');
-
+const service = require('../lib/service');
 const io = require('socket.io-client');
 
 class TestObject {
@@ -36,12 +34,14 @@ class Viewer {
   }
 }
 
-const repository = new Repository(12345);
+service.setupRepository({
+  port : 12345
+});
 
-const agent = new Agent('http://localhost:12345', 'agent-0');
-//agent.add('test', new TestObject());
-agent.addBuiltin('base:heap');
-agent.addBuiltin('base:process');
-agent.addBuiltin('base:os');
+service.setupLocalAgent({
+  url: 'http://localhost:12345',
+  agentId : 'agent-0',
+  builtins : [ 'base:heap', 'base:process', 'base:os' ]
+});
 
 const viewer = new Viewer('http://localhost:12345');
